@@ -1,3 +1,8 @@
+
+
+
+
+
 var PropTypes = window.React.PropTypes;
 var React = window.React;
 
@@ -40,14 +45,16 @@ ProductCardComponent.propTypes = {
 var ProductListComponent = function(props) {
   var productCards = props.products.map(function (product, index) {
     return (
-      <ProductCardComponent
-        key={index}
-        id={product.id}
-        image={product.image}
-        title={product.title}
-        description={product.description}
-        price={product.price}
-      />
+        <div>
+          <ProductCardComponent
+            key={index}
+            id={product.id}
+            image={product.image}
+            title={product.title}
+            description={product.description}
+            price={product.price}
+          />
+        </div>   
     );
   });
   return (<div className="row">{productCards}</div>);
@@ -80,5 +87,26 @@ var testProducts = [
     price:2.8
   }
 ];
+        var SelfDestructTimerComponent = React.createClass({
+            getInitialState : function () {return {count: 5}; },
+            
+            decreaseDestructCounter: function() {
+                if(this.state.count>0){
+              this.setState({ count: this.state.count - 1});
+                }
+            },
+            componentWillMount: function(){
+                setInterval(this.decreaseDestructCounter, 1000);
+               
+            },
+            render: function() { var backgroundStyle;
+                if(this.state.count<=0){ backgroundStyle= {background: 'red'} };
+                return (
+                        <div style = {backgroundStyle}> Self Destruct: {this.state.count}
+                            
+                        </div>
+                    );
+                }
+        });
 
-ReactDOM.render(<ProductListComponent products={testProducts} />, document.getElementById('root'));
+ReactDOM.render(<SelfDestructTimerComponent />, document.getElementById('root'));
