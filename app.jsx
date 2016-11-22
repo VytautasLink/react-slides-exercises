@@ -54,6 +54,7 @@ var ProductListComponent = function(props) {
             description={product.description}
             price={product.price}
           />
+            <SelfDestructTimerComponent />
         </div>   
     );
   });
@@ -88,7 +89,7 @@ var testProducts = [
   }
 ];
         var SelfDestructTimerComponent = React.createClass({
-            getInitialState : function () {return {count: 5}; },
+            getInitialState : function () {return {count: 3}; },
             
             decreaseDestructCounter: function() {
                 if(this.state.count>0){
@@ -109,4 +110,4 @@ var testProducts = [
                 }
         });
 
-ReactDOM.render(<SelfDestructTimerComponent />, document.getElementById('root'));
+ReactDOM.render(<ProductListComponent products={testProducts} />, document.getElementById('root'));
