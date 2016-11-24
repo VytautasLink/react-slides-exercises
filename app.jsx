@@ -1,3 +1,8 @@
+var Router = window.ReactRouter.Router;
+var Route = window.ReactRouter.Route;
+var IndexRoute = window.ReactRouter.IndexRoute;
+
+var hashHistory = window.ReactRouter.hashHistory;
 var PropTypes = window.React.PropTypes;
 var React = window.React;
 
@@ -28,6 +33,7 @@ var ProductCardComponent = React.createClass( {
         );
     }
 });
+
 var FormComponent = React.createClass( {
     render: function() {
         return (
@@ -39,113 +45,113 @@ var FormComponent = React.createClass( {
                     </div>
                     <div className="form-group">
                         <label for="Word" className="sr-only">Text</label>
-                        <input type="text" className="form-control" id="inputPassword2" placeholder="Your Text"/>
-                     </div>
-                        <button type="submit" className="btn btn-default">Submit</button>
-                 </form>
-              </div>
-                );
-     }
+                        <input type="text" className="form-control" id="inputPassword2" placeholder="Your Text" />
+                    </div>
+                    <button type="submit" className="btn btn-default">Submit</button>
+                </form>
+            </div>
+        );
+    }
 });
-    
+
 
 ProductCardComponent.propTypes = {
-                    id: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
 };
 
-var SelfDestructTimerComponent = React.createClass({
-                    getInitialState: function() {
-    return {
-                    countdown: 5,
-      intervalId: -1,
-    };
-  },
+var SelfDestructTimerComponent = React.createClass( {
+    getInitialState: function() {
+        return {
+            countdown: 5,
+            intervalId: -1,
+        };
+    },
 
-  componentWillMount: function() {
-                    this.setState( { intervalId: setInterval( this.countdown, 1000 ) });
-                },
+    componentWillMount: function() {
+        this.setState( { intervalId: setInterval( this.countdown, 1000 ) });
+    },
 
-  componentWillUnmount: function() {
-                    clearInterval( this.state.intervalId );
-                },
+    componentWillUnmount: function() {
+        clearInterval( this.state.intervalId );
+    },
 
-  countdown: function() {
-    var currentCountdown = this.state.countdown;
-    if (this.state.countdown > 0) {
-                    this.setState( { countdown: currentCountdown - 1 });
-                }
-  },
+    countdown: function() {
+        var currentCountdown = this.state.countdown;
+        if ( this.state.countdown > 0 ) {
+            this.setState( { countdown: currentCountdown - 1 });
+        }
+    },
 
-  render: function() {
-    var style = {} ;
-    if (this.state.countdown < 1) {
-                    style.background = 'red';
-                }
-    return (<div style={style}>{this.state.countdown}</div>);
-  }
+    render: function() {
+        var style = {};
+        if ( this.state.countdown < 1 ) {
+            style.background = 'red';
+        }
+        return ( <div style={style}>{this.state.countdown}</div> );
+    }
 });
 
-var ProductListComponent = function(props) {
-  var productCards = props.products.map(function (product, index) {
-    return (
-      <div>
-                    <div>
-                        <ProductCardComponent
-                            key={index}
-                            id={product.id}
-                            image={product.image}
-                            title={product.title}
-                            description={product.description}
-                            price={product.price}
-                            />
-                    </div>
-                    <div>
-
-                    </div>
+var ProductListComponent = function( props ) {
+    var productCards = props.products.map( function( product, index ) {
+        return (
+            <div>
+                <div>
+                    <ProductCardComponent
+                        key={index}
+                        id={product.id}
+                        image={product.image}
+                        title={product.title}
+                        description={product.description}
+                        price={product.price}
+                        />
                 </div>
+                <div>
+
+                </div>
+            </div>
 
 
-                );
-  });
-  return (
-    <div className="row">
-                    <SelfDestructTimerComponent />
-                    {productCards}
-                </div>);
+        );
+    });
+    return (
+        <div className="row">
+            <SelfDestructTimerComponent />
+            {productCards}
+        </div> );
 
 };
 
 ProductListComponent.propTypes = {
-                    products: React.PropTypes.array.isRequired,
+    products: React.PropTypes.array.isRequired,
 };
 
 var testProducts = [
-  {
-                    id: 1,
-    image: 'samsung.jpg',
-    title: 'Telephons',
-    description: 'Fainas',
-    price:2.5
-  },
-  {
-                    id: 2,
-    image: 'samsung.jpg',
-    title: 'Telephons 2',
-    description: 'Fainas',
-    price:2.7
-  },
-  {
-                    id: 3,
-    image: 'samsung.jpg',
-    title: 'Telephons 3',
-    description: 'Fainas',
-    price:2.8
-  }
+    {
+        id: 1,
+        image: 'samsung.jpg',
+        title: 'Telephons',
+        description: 'Fainas',
+        price: 2.5
+    },
+    {
+        id: 2,
+        image: 'samsung.jpg',
+        title: 'Telephons 2',
+        description: 'Fainas',
+        price: 2.7
+    },
+    {
+        id: 3,
+        image: 'samsung.jpg',
+        title: 'Telephons 3',
+        description: 'Fainas',
+        price: 2.8
+    }
 ];
-
-ReactDOM.render(<FormComponent/>, document.getElementById('formDiv'));
-ReactDOM.render(<ProductListComponent products={testProducts} />, document.getElementById('root'));
+ReactDOM.render( <FormComponent />, document.getElementById( 'routDiv' ) );
+ReactDOM.render( <FormComponent />, document.getElementById( 'formDiv' ) );
+ReactDOM.render( <ProductListComponent products={testProducts} />, document.getElementById( 'root' ) );
